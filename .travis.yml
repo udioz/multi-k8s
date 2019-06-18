@@ -1,0 +1,19 @@
+required: sudo
+services:
+  - docker
+
+before_install:
+  - docker build -t udioz/react-test -f ./client/Dockerfile.dev ./client
+
+after_success:
+  - docker build udioz/multi-client ./client
+  - docker build udioz/multi-nginx ./nginx
+  - docker build udioz/multi-server ./server
+  - docker build udioz/multi-worker ./worker
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  - docker push udioz/multi-client
+  - docker push udioz/multi-nginx
+  - docker push udioz/multi-server
+  - docker push udioz/multi-worker
