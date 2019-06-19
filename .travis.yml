@@ -10,10 +10,10 @@ script:
   - docker run udioz/react-test npm test -- --coverage
 
 after_success:
-  - docker build udioz/multi-client ./client
-  - docker build udioz/multi-nginx ./nginx
-  - docker build udioz/multi-server ./server
-  - docker build udioz/multi-worker ./worker
+  - docker build -t udioz/multi-client ./client
+  - docker build -t udioz/multi-nginx ./nginx
+  - docker build -t udioz/multi-server ./server
+  - docker build -t udioz/multi-worker ./worker
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
