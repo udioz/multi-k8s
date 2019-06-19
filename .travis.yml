@@ -6,6 +6,9 @@ services:
 before_install:
   - docker build -t udioz/react-test -f ./client/Dockerfile.dev ./client
 
+script:
+  - docker run udioz/react-test npm test -- --coverage
+
 after_success:
   - docker build udioz/multi-client ./client
   - docker build udioz/multi-nginx ./nginx
