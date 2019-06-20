@@ -1,0 +1,36 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "udioz/multi-client",
+            "host_name": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "udioz/multi-server",
+            "host_name": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "udioz/multi-worker",
+            "host_name": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "udioz/multi-nginx",
+            "host_name": "nginx",
+            "essential": true,
+            "portMappings":[
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["client", "server"]
+        }
+    ]
+}
