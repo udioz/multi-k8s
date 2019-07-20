@@ -1,0 +1,20 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: udioz-co-il-tls
+spec:
+  secretName: udioz-co-il
+  issuerRef: 
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: udioz.co.il
+  dnsNames:
+    - udioz.co.il
+    - www.udioz.co.il
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - udioz.co.il
+          - www.udioz.co.il
